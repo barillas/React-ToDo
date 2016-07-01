@@ -1,7 +1,7 @@
 var React = require('react');
-
+var TodoList = require('TodoList');
 var TodoApp = React.createClass({
-  render: function () {
+
     getInitialState: function() {
       return {
         todos: [
@@ -14,16 +14,22 @@ var TodoApp = React.createClass({
           }, {
             id: 3,
             text: "Eat Fried Chicken"
+          }, {
+            id: 4,
+            text: "Dave and Busters"
           }
-          
+
         ]
 
         }
 
     },
+    render: function () {
+    var {todos} = this.state
     return (
 
       <div>
+        <TodoList todos ={todos} />
         To Do App.JSX
       </div>
     )
