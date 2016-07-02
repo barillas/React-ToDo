@@ -34,8 +34,11 @@ var TodoApp = React.createClass({
     return (
 
       <div>
+        <div className= "text-center">
+          <h1>Todo App</h1>
+        </div>
         <TodoList todos ={todos} />
-        <AddTodo />
+        <AddTodo onAddTodo = {this.handleAddTodo}/>
       </div>
     )
   }
