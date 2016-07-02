@@ -12,14 +12,26 @@ describe('Add Todo', () => {
   });
 
   it('should call onAddTodo if valid text entered', () => {
+    var todoText = "Hello"
     var spy = expect.createSpy();
     var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo = {spy} />);
     var $el = $(ReactDOM.findDOMNode(addTodo));
-    addTodo.refs.todoText.value = "Hello";
+    addTodo.refs.todoText.value = todoText;
     TestUtils.Simulate.submit($el.find('form')[0]);
 
-    expect(spy).toHaveBeenCalledWith("Hello");
+    expect(spy).toHaveBeenCalledWith(todoText);
 
+  });
+
+  it('should not call onAddTodo if empty string', () => {
+    var todoText = ""
+    var spy = expect.createSpy();
+    var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo = {spy} />);
+    var $el = $(ReactDOM.findDOMNode(addTodo));
+    addTodo.refs.todoText.value = todoText;
+    TestUtils.Simulate.submit($el.find('form')[0]);
+
+    expect(spy).toNotHaveBeenCalled();
 
   });
 
