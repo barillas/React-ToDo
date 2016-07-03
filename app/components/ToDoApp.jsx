@@ -10,13 +10,10 @@ var TodoApp = React.createClass({
 
     getInitialState: function() {
         return {showCompleted: false, searchText: '', todos: TodoAPI.getTodos()}
-
     },
 
     componentDidUpdate: function() {
-
         TodoAPI.setTodos(this.state.todos)
-
     },
 
     handleAddTodo: function(text) {
@@ -46,7 +43,6 @@ var TodoApp = React.createClass({
             }
             return todo;
         });
-
         this.setState({todo: updatedTodos});
     },
 
@@ -59,7 +55,16 @@ var TodoApp = React.createClass({
         return (
 
             <div>
+              <div className="top-bar">
+                  <div className="top-bar-right">
+                      <ul className="menu">
+                          <li>
+                            Built by <a href="http://oscarbarillas.com">Oscar Barillas</a>
+                          </li>
+                      </ul>
+                  </div>
 
+              </div>
                 <h1 className="page-title">Todo App</h1>
 
                 <div className="row">
