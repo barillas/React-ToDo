@@ -1,4 +1,5 @@
-
+import firebase, {firebaseRef} from 'app/firebase/';
+import moment from 'moment';
 //Set SearchText Redux Action
 export var setSearchText = (searchText) => {
 
@@ -15,11 +16,11 @@ export var toggleShowCompleted = () => {
   }
 }
 
-export var addTodo = (text) => {
+export var addTodo = (todo) => {
 
   return {
     type: 'ADD_TODO',
-    text: text
+    todo: todo
   };
 }
 
@@ -29,6 +30,28 @@ export var toggleTodo = (id) => {
     id: id
   }
 }
+
+export var startAddTodo = (text) => {
+
+  return (dispatch, getState) => {
+
+    var todo =   {
+        text: text,
+        completed: false,
+        createdAt: moment().unix(),
+        completedAt: null
+      };
+
+    var todoRef = firebaseRef.child('todos').push(todo);
+
+    todoRef.then(() => {
+      dispatch(addTodo({
+        ...todo,
+        id: todoRef.key
+      }));
+    })
+  }
+};
 
 export var addTodos = (todos) => {
   return {
